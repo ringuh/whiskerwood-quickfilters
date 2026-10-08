@@ -7,6 +7,17 @@
 ;   - new names are added at the end of the list
 ; Changes are picked up when you load a save.
 ;
+; Example QuickFilters.txt - copy these lines (without the leading '; ') into your own file:
+;
+;   [presets]
+;   Fuel stuff   = coal, fuel, wood        ; NEW button, added at the end of the list
+;   Stone + ore  = stone, @ore, coal       ; REPLACES the built-in 'Stone + ore'
+;   All food     =                         ; REMOVES the built-in 'All food' button
+;   Metal bars   =                         ; REMOVES the built-in 'Metal bars' button
+;
+;   To remove a built-in button: write its name exactly as it shows on the button, then '=' and nothing else.
+;   Your own file only needs the lines you want to change; everything else keeps the built-in list below.
+;
 ; Format:   Filter name = token, token, token
 ;   resource id     e.g. stone, copperore, wheat  (list below)
 ;   @category       every resource in that window category, e.g. @ore, @rawFood (list below)
