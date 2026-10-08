@@ -1,0 +1,7 @@
+{
+	"Name": "QuickFilters",
+	"Description": "Conveyor Belt Quick Filters: a toggle button on every resource category, and a Quick Filters list (Stone + ore, All farmed, Base materials, ... and your own) beside the Input Hopper and Filter windows. Own filters go in Saved/mods/QuickFiltersConfig/QuickFilters.txt.",
+	"Version": "1.0",
+	"CreatedBy": "rinku",
+	"EngineVersion": "5.8"
+}

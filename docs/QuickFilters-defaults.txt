@@ -1,0 +1,132 @@
+; Conveyor Belt Quick Filters - custom filters for the Input Hopper and Filter windows
+;
+; Save your own file as  %localappdata%\Whiskerwood\Saved\mods\QuickFiltersConfig\QuickFilters.txt
+; (the name must end in .txt, not .txt.txt). It is read after the built-in list below:
+;   - a line with the same name as a built-in filter replaces it
+;   - 'Name =' with nothing after the = removes that filter
+;   - new names are added at the end of the list
+; Changes are picked up when you load a save.
+;
+; Format:   Filter name = token, token, token
+;   resource id     e.g. stone, copperore, wheat  (list below)
+;   @category       every resource in that window category, e.g. @ore, @rawFood (list below)
+;   *               every resource
+;   start the value with -  to make the button only turn resources OFF, e.g.  No food = -@rawFood, @foodTier1
+; Clicking a filter toggles it: if all its resources are on they are turned off, otherwise they are turned on.
+; Everything else stays as it is. Resources a window doesn't have are skipped.
+; Spaces and upper/lower case don't matter; ; or # starts a comment (also at the end of a line).
+;
+; Categories:
+;   @rawFood        Raw Food
+;   @foodTier1      Cooked Food
+;   @preparedFood   Prepared Food
+;   @mealFood       High Cuisine
+;   @tea            Tea
+;   @raw            Raw Material
+;   @ore            Ores
+;   @refined        Refined Material
+;   @tools          Supplies
+;   @naval          Naval
+;   @trade          Export Goods
+;
+; Resource ids:
+;   wood             Logs
+;   planks           Planks
+;   stone            Stone
+;   bricks           Cut Stone
+;   wheat            Wheat
+;   flour            Flour
+;   spice            Spices
+;   rawfish          Fish
+;   mushroom         Mushrooms
+;   berries          Berries
+;   bread            Bread
+;   smokedfish       Smoked Fish
+;   berrysoup        Berry Soup
+;   jampastry        Jam Pastries
+;   stew             Mushroom Stew
+;   fishskewers      Fish Skewers
+;   simplemeal       Savory Meals
+;   heartymeal       Hearty Meals
+;   platter          Fancy Meals
+;   cannedfood       Canned Food
+;   basicRations     Hardtack
+;   tea              Tea
+;   finetea          Fine Tea
+;   tealeaves        Tea Leaves
+;   flax             Flax
+;   cotton           Cotton
+;   rope             Ropes
+;   fabric           Fabrics
+;   fishingnet       Fishing Nets
+;   sail             Sails
+;   clothes          Tailored Cloaks
+;   bedding          Bedding
+;   copperore        Copper Ore
+;   tinore           Tin Ore
+;   ironore          Iron Ore
+;   goldore          Gold Ore
+;   coal             Coal
+;   rocksalt         Rock Salt
+;   potash           Potash
+;   cobaltore        Cobalt Ore
+;   copperbar        Copper Bars
+;   bronze           Bronze Bars
+;   ironbar          Iron Bars
+;   steel            Steel Bars
+;   goldbar          Gold Bullion
+;   ruby             Rubies
+;   sapphire         Sapphires
+;   emerald          Emeralds
+;   amethyst         Amethyst
+;   amber            Amber
+;   obsidian         Obsidian
+;   fuel             Fuel
+;   fertilizer       Fertilizer
+;   tablesalt        Table Salt
+;   salinesolution   Saline Solution
+;   oil              Oil
+;   medicine         Medicine
+;   soap             Soap
+;   candles          Candles
+;   nails            Bronze Nails
+;   teaset           Tea Set
+;   furniture        Furniture
+;   cannonframes     Cannon Frames
+;   bronzecannons    Bronze Cannons
+;   handTool         Metal Tools
+;   steelplates      Steel Plates
+;   steelcannons     Steel Cannons
+;   tools            Machinery
+;   trinkets         Trinkets
+;   waste            Waste
+;   peppers          Peppers
+;   mousetrap        Bugtraps
+;   diplomacySeals   Royal Wax Seals
+;   pollution        Pollution
+;   fallow           Fallow
+;   thread           Threads
+;   simpleclothes    Woven Cloaks
+;   advancedRations  Ration Meals
+;   vises            Wooden Vises
+;   scissors         Scissors
+;   firetongs        Fire Tongs
+;   ironpots         Iron Pots
+;   precisionscales  Precision Scales
+;   firstrate        First-Rate Ship
+;   bathed           Bath
+;   corpse           Corpse
+;   guano            Guano
+;   stone_cannonball Stone Shot
+;   iron_cannonball  Iron Shot
+;   bronze_cannonball Bronze Shot
+;   chainshot_cannonball Chain Shot
+;   pirate_protection Pirate protection seal
+
+[presets]
+All = *
+Stone + ore = stone, @ore
+All farmed = wheat, berries, mushroom, flax, cotton, tealeaves, peppers, wood
+Base materials = wood, stone, @ore, rawfish, wheat, berries, mushroom, flax, cotton, tealeaves, peppers
+All food = @rawFood, @foodTier1, @preparedFood, @mealFood
+Metal bars = copperbar, bronze, ironbar, steel, goldbar

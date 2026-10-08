@@ -1,0 +1,37 @@
+"workshopitem"
+{
+	"appid"		"2489330"
+	"publishedfileid"		"0"
+	"contentfolder"		"E:\modding\whiskerwood-quickfilters\workshop\content"
+	"previewfile"		"E:\modding\whiskerwood-quickfilters\docs\screenshot.png"
+	"title"		"Conveyor Belt Quick Filters"
+	"description"		"[b]Stop clicking every icon in the Input Hopper and Filter windows.[/b]
+
+[h2]Features[/h2]
+[list]
+[*][b]toggle[/b] button on every category header: turns the whole category on, or off when it is already all on
+[*][b]Quick Filters[/b] list beside the window: All, Stone + ore, All farmed, Base materials, All food, Metal bars
+[*]Each quick filter is a toggle and leaves every other resource alone
+[*]Make your own filters in a text file (see below)
+[*]Works in the Input Hopper (while Whitelist allowed resources is on) and in the Filter
+[*]Both features can be switched off under Settings - Mods
+[*]Uses the game's own icon click, so nothing is patched and saves stay normal
+[*]Works while paused, and does nothing in the background
+[/list]
+
+[h2]Your own filters[/h2]
+[olist]
+[*]Open the [url=https://github.com/ringuh/whiskerwood-quickfilters/blob/main/docs/QuickFilters-defaults.txt]defaults file on GitHub[/url]: it lists the format, every resource id and every category
+[*]Create the folder %localappdata%\Whiskerwood\Saved\mods\QuickFiltersConfig
+[*]Save a text file named QuickFilters.txt there (not QuickFilters.txt.txt)
+[*]Write a [presets] line, then one filter per line, for example: Fuel stuff = coal, fuel, wood
+[*]Load your save
+[/olist]
+Use @ore, @rawFood and so on for a whole category, * for everything. A line with a built-in name replaces that filter; Name = with nothing after it removes it.
+
+[h2]Source[/h2]
+[url=https://github.com/ringuh/whiskerwood-quickfilters]GitHub[/url]
+
+Created using the [url=https://github.com/Whiskerwood-Modding/Whiskerwood-Project]Whiskerwood modkit[/url]."
+	"changenote"		"1.0: first release."
+}
