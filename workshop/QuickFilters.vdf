@@ -33,5 +33,5 @@ Use @ore, @rawFood and so on for a whole category, * for everything. A line with
 [url=https://github.com/ringuh/whiskerwood-quickfilters]GitHub[/url]
 
 Created using the [url=https://github.com/Whiskerwood-Modding/Whiskerwood-Project]Whiskerwood modkit[/url]."
-	"changenote"		"1.0: first release."
+	"changenote"		"1.1: Works in a new game too. Before, the toggles and the Quick Filters list only appeared after loading a save."
 }

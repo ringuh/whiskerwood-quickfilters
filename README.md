@@ -100,6 +100,7 @@ Silent by default. Create `%localappdata%\Whiskerwood\Saved\mods\QuickFiltersCon
 
 ## Version history
 
+- **1.1**: works in a new game too (before, the toggles and the Quick Filters list only appeared after loading a save).
 - **1.0**: first release.
 
 ## Credits

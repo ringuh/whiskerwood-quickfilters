@@ -23,7 +23,7 @@ import sys, os
 sys.path.insert(0, os.path.dirname(__file__))
 from qf_common import *
 
-BUILD = 'v12'
+BUILD = 'v13'
 OUT = os.path.join(os.path.dirname(__file__), 'out')
 os.makedirs(OUT, exist_ok=True)
 
@@ -217,7 +217,7 @@ def label(btn_pin, text_pin, x, y, tag, prev, prev_pin='then'):
     return st
 
 
-# ---- BeginPlay -> onLoadingFinished
+# ---- BeginPlay -> onLoadingFinished (+ setup guard below, for new games)
 bp = g.event('/Script/Engine.Actor', 'ReceiveBeginPlay', [], 'Begin', 0, -4000)
 api = modapi(g, 200, -3850, name='BindApi')
 evL = g.custom_event('OnLoaded', [], 0, -3600)
@@ -226,7 +226,25 @@ ex(bp, b1)
 
 # ---- OnLoaded: Debug, input, helpers, waiter, panel, config
 X, Y = 300, -3600
-rdf = api_call(g, 'ReadModTextFile', X, Y, name='ReadDebugFile', modName=CFG, Filename='debug'); ex(evL, rdf)
+# ---- Setup guard (1.1): a NEW game doesn't deliver onLoadingFinished to BP_MapLoad, so setup also runs from
+#      BeginPlay. BeginPlay (after the bind) and OnLoaded enter the same guard: Ready -> nothing; no player
+#      controller yet -> SetupTries < 10 -> SetupTries++ -> one-shot 1 s timer back into OnLoaded; else
+#      Ready = true -> setup once.
+gr = g.branch(-300, -3300, 'BrReady'); link(g.get('Ready', BOOL, -450, -3150, name='ReadyGet')['Ready'], gr['Condition'])
+ex(b1, gr); ex(evL, gr)
+pcG = g.call('/Script/Engine.GameplayStatics:GetPlayerController', 'PCGuard', -300, -3000)
+pcv = g.call(KSL + ':IsValid', 'PCGuardValid', -150, -3000); link(pcG['ReturnValue'], pcv['Object'])
+gp = g.branch(-50, -3300, 'BrHavePC'); link(pcv['ReturnValue'], gp['Condition']); ex(gr, gp, 'else')
+srd = g.setv('Ready', BOOL, 150, -3300, value='true', name='SetReady'); ex(gp, srd)
+stg0 = g.get('SetupTries', INT, 0, -2800, name='SetupTriesGet')
+stl = g.call(KML + ':Less_IntInt', 'SetupTriesLeft', 150, -2800, B='10'); link(stg0['SetupTries'], stl['A'])
+bst = g.branch(150, -3000, 'BrSetupRetry'); link(stl['ReturnValue'], bst['Condition']); ex(gp, bst, 'else')
+sta = g.call(KML + ':Add_IntInt', 'SetupTriesPlus', 300, -2850, B='1'); link(stg0['SetupTries'], sta['A'])
+sst = g.setv('SetupTries', INT, 400, -3000, name='SetSetupTries'); link(sta['ReturnValue'], sst['SetupTries']); ex(bst, sst)
+stm = g.call(KSL + ':K2_SetTimer', 'RetrySetup', 650, -3000, FunctionName='OnLoaded', Time='1.000000', bLooping='false')
+link(self_node(g, 500, -2850, 'MeSetupTimer')['self'], stm['Object']); ex(sst, stm)
+
+rdf = api_call(g, 'ReadModTextFile', X, Y, name='ReadDebugFile', modName=CFG, Filename='debug'); ex(srd, rdf)
 sdb = sv('Debug', BOOL, X + 300, Y, notb(g, g.call(KSTR + ':IsEmpty', 'DebugFileEmpty', X + 250, Y + 200, )['ReturnValue'], X + 450, Y + 200, 'DebugFileThere'))
 link(rdf['ReturnValue'], [n for n in g.nodes if n.name == 'DebugFileEmpty'][0]['InString'])
 ex(rdf, sdb)
@@ -782,7 +800,7 @@ write('BP_MapLoad', g)
 # =========================================================================== variables list + validation
 VARS = {
     'BP_MapLoad': [
-        ('Debug', 'Boolean'), ('IsSorter', 'Boolean'), ('WlOn', 'Boolean'), ('TurnOn', 'Boolean'),
+        ('Debug', 'Boolean'), ('Ready', 'Boolean'), ('SetupTries', 'Integer'), ('IsSorter', 'Boolean'), ('WlOn', 'Boolean'), ('TurnOn', 'Boolean'),
         ('Sel', 'Integer'), ('Changed', 'Integer'), ('DumpCount', 'Integer'), ('HdrIdx', 'Integer'), ('CurCat', 'String'),
         ('CatsDone', 'Boolean'), ('GroupBox', 'Panel Widget (Object Reference)'), ('LastX', 'Float'),
         ('Section', 'String'), ('Value', 'String'),
